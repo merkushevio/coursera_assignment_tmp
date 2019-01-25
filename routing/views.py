@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from django.shortcuts import render
 from django.views.decorators import http
 
 
@@ -31,6 +32,21 @@ def sum_post_method(request):
     b = int(request.POST.get('b'))
     return HttpResponse(content_type=a + b, status=200)
 
+
+def echo(request):
+    params = []
+    try:
+        if request.method == 'GET':
+            for param in request.GET:
+                params.append((param, request.GET[param]))
+        elif request.method == 'POST':
+            for param in request.POST:
+                params.append((param, request.POST[param]))
+        header = request.META.get('HTTP_X-PRINT-STATEMENT')
+        context = {'statement': header, 'params': params, 'method': request.method.lower()}
+    except Exception:
+        pass
+    return render(request, 'echo.html', context)
 
 # from django.http import HttpResponse
 # from django.views.decorators.http import require_GET, require_POST

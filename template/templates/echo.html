@@ -1,0 +1,1 @@
+{%  if params %}{{ method }}{% for param, value in params %} {{ param }}: {{ value }}{% endfor %}{% endif %} statement is {% if statement %}{{ statement }}{% else %}empty{% endif %}
