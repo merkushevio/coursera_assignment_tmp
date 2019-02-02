@@ -48,7 +48,7 @@ def delete_u1():
 
 
 def unsubscribe_u2_from_blogs():
-    Blog.objects.get(author__first_name='u2').subscribers.clear()
+    Blog.subscribers.though.objects.filter(user__first_name='u2').delete()
 
 
 def get_topic_created_grated():
